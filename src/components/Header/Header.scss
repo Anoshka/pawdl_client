@@ -1,0 +1,28 @@
+.input {
+  display: flex;
+  justify-content: flex-end;
+}
+.main {
+  width: 100%;
+  background-color: rgba(102, 118, 209, 0.527);
+  padding-bottom: 2rem;
+}
+.profile {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 2rem;
+  &__image {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+  }
+  &__nav-bar {
+    display: flex;
+    padding-right: 3rem;
+  }
+  &__nav {
+    padding: 0 3rem;
+  }
+}

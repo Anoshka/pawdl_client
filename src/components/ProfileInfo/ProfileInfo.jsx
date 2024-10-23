@@ -21,7 +21,6 @@ function ProfileInfo(props) {
       </div>
       <div className="user__details">
         <h2 className="user__pet-name">{user.pet_name}</h2>
-        <h3 className="user__pet-breed">{user.breed}</h3>
         <h3 className="user__pet-bio">{user.bio}</h3>
       </div>
     </div>

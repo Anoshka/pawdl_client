@@ -118,8 +118,8 @@ const Signup = (props) => {
           localStorage.setItem("SavedToken", "Bearer " + res.data.token);
           props.setLoggedIn(true);
           props.setEmail(email);
-          props.setName(user_name);
-          navigate(`/`);
+          props.setName(body.user_name);
+          navigate(`/friends`);
         }, 2000);
       }
     } catch (err) {
@@ -145,9 +145,6 @@ const Signup = (props) => {
   }, [registerResponseMessage]);
   return (
     <div className={"mainContainer"}>
-      <div className={"titleContainer"}>
-        <div>Signup!</div>
-      </div>
       <br />
       <div className={"inputContainer"}>
         <input

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getCurrentUser } from "../../services/users-services";
 import "./Header.scss";
 import dog from "../../assets/dog_2.jpeg";
 
 const Home = (props) => {
   const { loggedIn, email } = props;
+  console.log("props are ", loggedIn, email);
   const navigate = useNavigate();
   const { id } = useParams();
+  console.log("id is ", id);
   const [user, setUser] = useState({});
   console.log("my props are ", id);
 
@@ -57,8 +59,9 @@ const Home = (props) => {
 
       <div className="profile">
         <div className="profile__nav-bar">
-          <h3 className="profile__nav">Friends</h3>
-          <h3 className="profile__nav">Logout</h3>
+          <Link to="/friends">
+            <h3 className="profile__nav">Friends</h3>
+          </Link>
         </div>
         <img src={dog} className="profile__image" />
       </div>

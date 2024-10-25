@@ -109,21 +109,19 @@ const Signup = (props) => {
         password: password,
       });
       const res = await register(body, config);
-      console.log("new user is ", res.data);
       if (res.data.token) {
         setRegisterResponseMessage("Signup successful...Logging In.");
         setRegisterResponseIsError(false);
         setTimeout(function () {
-          console.log("in function");
           localStorage.setItem("SavedToken", "Bearer " + res.data.token);
+          localStorage.setItem("SavedId", res.data._id);
           props.setLoggedIn(true);
           props.setEmail(email);
           props.setName(body.user_name);
-          navigate(`/friends`);
+          navigate(`/`);
         }, 2000);
       }
     } catch (err) {
-      //console.log(err.response)
       if (err.response.data.errorMsg) {
         setRegisterResponseMessage(err.response.data.errorMsg);
         setRegisterResponseIsError(true);

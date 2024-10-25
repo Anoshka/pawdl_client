@@ -45,16 +45,15 @@ const Login = (props) => {
         },
       };
       const body = JSON.stringify({ email, password });
-      console.log("login email and body", email, password);
       const res = await login(body, config);
       const id = res.data._id;
-      console.log("res is ", res);
       //const res = await axios.post(`${}/users/login`, body, config);
       if (res.data.token) {
         localStorage.setItem("SavedToken", "Bearer " + res.data.token);
+        localStorage.setItem("SavedId", res.data._id);
         props.setLoggedIn(true);
         props.setEmail(email);
-        navigate(`/${id}`);
+        navigate(`/`);
       } else {
         setLoginErrorVisible(true);
       }

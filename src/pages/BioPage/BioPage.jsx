@@ -3,29 +3,29 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getCurrentUser, getUserPosts } from "../../services/users-services";
 import "./BioPage.scss";
 import ProfileInfo from "../../components/ProfileInfo/ProfileInfo";
+import Post from "../../components/Post/Post";
 
 const Home = (props) => {
   const { loggedIn, email } = props;
   const navigate = useNavigate();
-  const { id } = useParams();
+  const id = localStorage.getItem("SavedId");
   const [user, setUser] = useState({});
-  console.log("my props are ", id);
+  const [posts, setPosts] = useState([]);
 
   const fetchUser = async () => {
     const response = await getCurrentUser(id);
-    console.log("data is ", response.data);
     setUser(response.data);
     return response.data;
   };
   const fetchPosts = async () => {
     const response = await getUserPosts(id);
-    console.log("posts are ", response.data);
+    setPosts(response.data);
     return response.data;
   };
 
   useEffect(() => {
-    const data = fetchUser();
-    const posts = fetchPosts();
+    fetchUser();
+    fetchPosts();
   }, []);
 
   const onLoginClick = () => {
@@ -42,8 +42,21 @@ const Home = (props) => {
   };
 
   return (
-    <div className="mainContainer">
+    <div className="bio-page">
       <ProfileInfo info={user} />
+
+      {posts.length === 0 && (
+        <div className="posts-list__not-found">
+          <p className="posts-list__not-found-description">
+            No posts yet, add some here!
+          </p>
+        </div>
+      )}
+      <div className="posts__list">
+        {posts.map((post) => {
+          return <Post key={post.id} user={post} className="posts__post" />;
+        })}
+      </div>
     </div>
   );
 };

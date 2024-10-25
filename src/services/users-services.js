@@ -18,14 +18,12 @@ export async function getUsers() {
 
 export async function getCurrentUser(id) {
   try {
-    const url = `${BASE_URL}/users/${id}`;
-    //const response = await axios.get(url);
-    const response = axios.get(url, {
-      headers: {
-        Authorization: `${localStorage.getItem("SavedToken")}`,
-      },
-    });
-    return response;
+    if (id) {
+      console.log(id);
+      const url = `${BASE_URL}/users/${id}`;
+      const response = axios.get(url);
+      return response;
+    }
   } catch (err) {
     return err.response;
   }
@@ -74,7 +72,6 @@ export async function login(body, config) {
   try {
     const url = `${BASE_URL}/users/login`;
     const response = await axios.post(url, body, config);
-    console.log("loging response is ", response);
     return response;
   } catch (err) {
     return err.response;

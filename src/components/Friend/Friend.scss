@@ -1,0 +1,73 @@
+$primary-color: #f5f5dc;
+$secondary-color: #ff6f61;
+$hover-color: #a8d5ba;
+$text-color: #6f4c3e;
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: $primary-color;
+}
+
+.container {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.profile-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 15px;
+  padding: 20px;
+  text-align: center;
+  width: 25rem;
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: $hover-color;
+  }
+}
+
+.pet-photo {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.pet-name {
+  font-size: 1.5em;
+  color: $text-color;
+}
+
+.pet-bio {
+  color: #555;
+  font-size: 0.9em;
+}
+
+.icons {
+  margin-top: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+
+  .chat-icon,
+  .add-icon {
+    font-size: 1.5em;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+}

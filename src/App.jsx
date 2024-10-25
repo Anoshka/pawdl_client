@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -8,16 +8,26 @@ import FriendsPage from "./pages/FriendsPage/FriendsPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import Chat from "./components/Chat/Chat";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem("SavedToken");
+    if (savedToken) {
+      setToken(savedToken.split(" ")[1]);
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Header />
       <Routes>
         <Route
-          path="/:id"
+          path="/"
           element={
             <BioPage
               email={email}
@@ -28,6 +38,7 @@ const App = () => {
         />
 
         <Route path="/friends" element={<FriendsPage />} />
+        <Route path="/chat" element={<Chat token={token} />} />
         <Route
           path="/login"
           element={<LoginPage setLoggedIn={setLoggedIn} setEmail={setEmail} />}
@@ -41,7 +52,7 @@ const App = () => {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 };

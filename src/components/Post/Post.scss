@@ -1,0 +1,61 @@
+$post-card-size: 500px;
+$gap: 15px;
+
+.post {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  &__card {
+    width: $post-card-size;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background: white;
+
+    &:hover {
+      transform: scale(1.05);
+      background-color: #a8d5ba;
+    }
+  }
+
+  &__photo {
+    width: 35rem;
+    height: 30rem;
+    object-fit: cover;
+  }
+
+  &__icons {
+    position: relative;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__icon {
+    color: #ff6f61;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #ff4081;
+      transform: scale(1.05);
+    }
+  }
+
+  &__description {
+    font-size: 14px;
+    margin: 10px;
+  }
+
+  &__time {
+    font-size: 12px;
+    color: #999;
+    margin: 0 10px 10px;
+  }
+}

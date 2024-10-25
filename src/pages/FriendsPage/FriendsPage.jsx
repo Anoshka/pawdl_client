@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import { getUsers } from "../../services/users-services";
 import Friend from "../../components/Friend/Friend";
 import "./FriendsPage.scss";
+import { useParams } from "react-router-dom";
 
 function FriendsPage() {
   const [users, setUsers] = useState([]);
+  const id = localStorage.getItem("SavedId");
 
   const fetchUser = async () => {
     const response = await getUsers();
-    console.log("users data is ", response.data);
     setUsers(response.data);
     return response.data;
   };
 
   useState(() => {
-    console.log("got users");
     const data = fetchUser();
   }, []);
 
@@ -29,7 +29,8 @@ function FriendsPage() {
       )}
       <div className="users__list">
         {users.map((user) => {
-          return <Friend key={user.id} user={user} className="users__user" />;
+          if (user.id != id)
+            return <Friend key={user.id} user={user} className="users__user" />;
         })}
       </div>
     </div>

@@ -1,28 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../services/users-services";
 import "./Header.scss";
 import dog from "../../assets/dog_2.jpeg";
 
 const Home = (props) => {
   const { loggedIn, email } = props;
-  console.log("props are ", loggedIn, email);
   const navigate = useNavigate();
-  const { id } = useParams();
-  console.log("id is ", id);
+  const id = localStorage.getItem("SavedId");
+  const [idLink, setIdLink] = useState("");
   const [user, setUser] = useState({});
-  console.log("my props are ", id);
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
   const fetchUser = async () => {
     const response = await getCurrentUser(id);
-    console.log("data is ", response.data);
     setUser(response.data);
     return response.data;
   };
 
   useEffect(() => {
     const data = fetchUser();
-  }, [id]);
+  }, []);
 
   const onLoginClick = () => {
     if (loggedIn) {
@@ -34,38 +37,40 @@ const Home = (props) => {
   };
 
   const onSignupClick = () => {
-    navigate("/signup");
+    navigate("/register");
+  };
+
+  const handleLogout = () => {
+    onLoginClick();
   };
 
   return (
-    <div className="main">
-      {/* <div className={"input"}>
-        <input
-          className={"input__button"}
-          type="button"
-          onClick={onLoginClick}
-          value={loggedIn ? "Log out" : "Log in"}
-        />
-        {!loggedIn && (
-          <input
-            className={"input__button"}
-            type="button"
-            onClick={onSignupClick}
-            value={"Sign up"}
-          />
-        )}
-      </div>
-      {loggedIn ? <div>Your email address is {email}</div> : <div />} */}
+    <header className="header">
+      <nav className="nav">
+        <Link to="/friends" className="nav-link">
+          Friends
+        </Link>
+        <Link to="/" className="nav-link">
+          Bio
+        </Link>
 
-      <div className="profile">
-        <div className="profile__nav-bar">
-          <Link to="/friends">
-            <h3 className="profile__nav">Friends</h3>
-          </Link>
+        <div className="dropdown">
+          <div className="hamburger" onClick={toggleDropdown}>
+            &#9776;
+          </div>
+          {dropdownOpen && (
+            <div className="dropdown-content">
+              <Link to="/edit-user" className="dropdown-item">
+                Edit User Info
+              </Link>
+              <button onClick={handleLogout} className="dropdown-item">
+                Logout
+              </button>
+            </div>
+          )}
         </div>
-        <img src={dog} className="profile__image" />
-      </div>
-    </div>
+      </nav>
+    </header>
   );
 };
 

@@ -3,25 +3,25 @@ import "./ProfileInfo.scss";
 
 function ProfileInfo(props) {
   const user = props.info;
-  console.log("user is ", user);
+
   return (
-    <div className="user">
-      <div className="user__top-line">
-        <img src={dog} alt="profile pic" className="user__image" />
-        <div className="user__stats">
-          <div className="user__stat">
-            <h3 className="user__stat--number">4</h3>
-            <p className="user__stat--description">posts</p>
+    <div className="profile-info">
+      <div className="profile-info__top-line">
+        <img src={dog} alt="Profile" className="profile-info__image" />
+        <div className="profile-info__stats">
+          <div className="profile-info__stat">
+            <h3 className="profile-info__stat--number">4</h3>
+            <p className="profile-info__stat--description">Posts</p>
           </div>
-          <div className="user__stat">
-            <h3 className="user__stat--number">20</h3>
-            <p className="user__stat--description">friends</p>
+          <div className="profile-info__stat">
+            <h3 className="profile-info__stat--number">20</h3>
+            <p className="profile-info__stat--description">Friends</p>
           </div>
         </div>
       </div>
-      <div className="user__details">
-        <h2 className="user__pet-name">{user.pet_name}</h2>
-        <h3 className="user__pet-bio">{user.bio}</h3>
+      <div className="profile-info__details">
+        <h2 className="profile-info__pet-name">{user.pet_name}</h2>
+        <h3 className="profile-info__pet-bio">{user.bio}</h3>
       </div>
     </div>
   );

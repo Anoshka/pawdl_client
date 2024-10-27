@@ -10,6 +10,8 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Chat from "./components/Chat/Chat";
 import DiscoverPage from "./pages/DiscoverPage/DiscoverPage";
+import AddEditPage from "./pages/AddEditPage/AddEditPage";
+import LogoutPage from "./pages/LogoutPage/LogoutPage";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -38,9 +40,11 @@ const App = () => {
           }
         />
         <Route path="/user/:id" element={<BioPage />} />
+        <Route path="/post/:id" element={<AddEditPage />} />
         <Route path="/discover" element={<DiscoverPage />} />
         <Route path="/friends" element={<FriendsPage />} />
         <Route path="/chat" element={<Chat token={token} />} />
+        <Route path="/logout" element={<LogoutPage />} />
         <Route
           path="/login"
           element={<LoginPage setLoggedIn={setLoggedIn} setEmail={setEmail} />}

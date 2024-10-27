@@ -5,9 +5,6 @@ import "./FriendsPage.scss";
 import { useParams } from "react-router-dom";
 
 function FriendsPage(props) {
-  if (useParams.id) {
-    console.log("id in bio page is ", useParams.id);
-  }
   const [users, setUsers] = useState([]);
   const id = localStorage.getItem("SavedId");
   const [search, setSearch] = useState("");
@@ -44,9 +41,21 @@ function FriendsPage(props) {
           value={sortOption}
           onChange={handleSortChange}
         >
-          <option value="name">Sort by Name</option>
-          <option value="temperament">Sort by Temperament</option>
-          <option value="distance">Sort by Distance</option>
+          <option value="name" className="friends__sort friends__sort--option">
+            Sort by Name
+          </option>
+          <option
+            value="temperament"
+            className="friends__sort friends__sort--temperament"
+          >
+            Sort by Temperament
+          </option>
+          <option
+            value="distance"
+            className="friends__sort friends__sort--distance"
+          >
+            Sort by Distance
+          </option>
         </select>
       </div>
 

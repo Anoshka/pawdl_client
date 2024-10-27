@@ -8,6 +8,10 @@ import arrow from "../../assets/arrow_back-mint-green-24px-svg.svg";
 const BASE_URL = "http://localhost:5050";
 
 function Chat({ token }) {
+  console.log(" out token ", token);
+  if (!token) {
+    token = localStorage.getItem("SavedToken");
+  }
   const id = localStorage.getItem("SavedId");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -26,13 +30,14 @@ function Chat({ token }) {
   useEffect(() => {
     if (token) {
       fetchUser();
+      console.log("token ", token);
+      setIsLoggedIn(true);
       const socketConnect = io(BASE_URL, {
         auth: { token: token },
       });
       setSocket(socketConnect);
       socketConnect.emit("authenticate", token);
-      console.log("token ", token);
-      setIsLoggedIn(true);
+
       socketConnect.on("connect", () => {
         console.log("Connected to Socket.IO server");
       });

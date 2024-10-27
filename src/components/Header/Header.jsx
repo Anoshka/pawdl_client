@@ -29,19 +29,26 @@ const Home = (props) => {
 
   const onLoginClick = () => {
     if (loggedIn) {
-      localStorage.removeItem("user");
+      localStorage.removeItem("SavedToken");
+      localStorage.removeItem("SavedId");
       props.setLoggedIn(false);
     } else {
       navigate("/login");
     }
   };
 
-  const onSignupClick = () => {
-    navigate("/register");
+  const onLogoutClick = () => {
+    if (loggedIn) {
+      props.setLoggedIn(false);
+    }
+    localStorage.removeItem("SavedToken");
+    localStorage.removeItem("SavedId");
+
+    navigate("/logout");
   };
 
-  const handleLogout = () => {
-    onLoginClick();
+  const onSignupClick = () => {
+    navigate("/register");
   };
 
   return (
@@ -66,7 +73,7 @@ const Home = (props) => {
               <Link to="/edit-user" className="dropdown-item">
                 Edit User Info
               </Link>
-              <button onClick={handleLogout} className="dropdown-item">
+              <button onClick={onLogoutClick} className="dropdown-item">
                 Logout
               </button>
             </div>

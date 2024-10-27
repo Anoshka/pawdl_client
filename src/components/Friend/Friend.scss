@@ -18,7 +18,7 @@ body {
 
 .profile-card {
   @include card;
-  height: 45vh;
+  height: 60vh;
 }
 
 .pet-photo {
@@ -29,7 +29,7 @@ body {
 }
 
 .pet-name {
-  font-size: 1.5em;
+  font-size: 2em;
   color: $text-color;
 }
 

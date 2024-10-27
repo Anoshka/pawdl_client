@@ -4,22 +4,43 @@
 .profile-info {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 4rem 6rem;
   max-width: 93.75rem;
   background: $primary-color;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
 
+  &__pet-name {
+    font-size: 4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  &__pet-bio {
+    font-size: 1.5rem;
+    color: #444;
+    line-height: 1.4;
+  }
+
+  @include desktop {
+    min-width: 95%;
+  }
+
   &__top-line {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
   }
+  &__add-post {
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+  }
 
   &__image {
-    width: 5rem;
-    height: 5rem;
+    width: 10rem;
+    height: 10rem;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 15px;
@@ -50,17 +71,5 @@
   &__details {
     text-align: left;
     margin-top: 1rem;
-
-    &__pet-name {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    &__pet-bio {
-      font-size: 1rem;
-      color: #444;
-      line-height: 1.4;
-    }
   }
 }

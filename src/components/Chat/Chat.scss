@@ -13,12 +13,13 @@ $text-color: #333;
   margin: 5rem 2rem;
   //background-color: $hover-color;
   //background-color: rgba(255, 255, 255, 0.2);
-  background-image: url("../../assets/blue-paws-transparent-green.png");
+  background-image: url("../../assets/bg-bronze-beige.png");
+  box-shadow: 4rem 4rem 4rem 4rem $primary-color inset;
   //background-repeat: repeat-x;
   //background-blend-mode: lighten;
-  //background-position: 10% auto;
-  background-size: contain;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  //background-position: 100% auto;
+  background-size: 40%;
+  //box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
   border: 1px solid $border-color;
   border-radius: 5px;

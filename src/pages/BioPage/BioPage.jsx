@@ -6,13 +6,20 @@ import ProfileInfo from "../../components/ProfileInfo/ProfileInfo";
 import Post from "../../components/Post/Post";
 
 const Home = (props) => {
+  let id = localStorage.getItem("SavedId");
+
+  if (useParams()["id"] !== undefined) {
+    console.log("id in bio page is ", useParams()["id"]);
+    id = useParams()["id"];
+  }
   const { loggedIn, email } = props;
   const navigate = useNavigate();
-  const id = localStorage.getItem("SavedId");
+
   const [user, setUser] = useState({});
   const [posts, setPosts] = useState([]);
 
   const fetchUser = async () => {
+    console.log("user get id is ", id);
     const response = await getCurrentUser(id);
     setUser(response.data);
     return response.data;
@@ -30,7 +37,8 @@ const Home = (props) => {
 
   const onLoginClick = () => {
     if (loggedIn) {
-      localStorage.removeItem("user");
+      localStorage.removeItem("SavedToken");
+      localStorage.removeItem("SavedId");
       props.setLoggedIn(false);
     } else {
       navigate("/login");
@@ -47,14 +55,19 @@ const Home = (props) => {
 
       {posts.length === 0 && (
         <div className="posts-list__not-found">
-          <p className="posts-list__not-found-description">
-            No posts yet, add some here!
-          </p>
+          <p className="posts-list__not-found-description">No posts yet!</p>
         </div>
       )}
       <div className="posts__list">
         {posts.map((post) => {
-          return <Post key={post.id} user={post} className="posts__post" />;
+          return (
+            <Post
+              key={post.id}
+              user={post}
+              userId={user.id}
+              className="posts__post"
+            />
+          );
         })}
       </div>
     </div>

@@ -11,18 +11,27 @@ $gap: 15px;
   flex-direction: column;
   align-items: center;
 
+  &__edit {
+    align-self: flex-end;
+    margin-bottom: 1.5rem;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
   &__card {
     @include card;
   }
 
   &__photo {
-    width: 35rem;
+    width: 32rem;
     height: 30rem;
     object-fit: cover;
   }
 
   &__icons {
     position: relative;
+    top: 1rem;
     left: 10px;
     display: flex;
     align-items: center;
@@ -44,6 +53,7 @@ $gap: 15px;
   &__description {
     font-size: 14px;
     margin: 10px;
+    padding-top: 1.5rem;
   }
 
   &__time {

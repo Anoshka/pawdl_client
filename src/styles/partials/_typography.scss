@@ -2,7 +2,65 @@
 
 @font-face {
   font-family: $primary-font-fontface;
-  src: url("D:/personal/brainstation_program/code/Capstone/assets/fonts/kitty-paw-font/GoodBoy-ZVJrl.ttf")
+  src: url("../../assets/fonts/ubuntu/Ubuntu-Regular.ttf") format("truetype");
+  font-weight: $font-weight-regular300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: $primary-font-fontface;
+  src: url("../../assets/fonts/ubuntu/Ubuntu-Italic.ttf") format("truetype");
+  font-weight: $font-weight-regular300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: $primary-font-fontface;
+  src: url("../../assets/fonts/ubuntu/Ubuntu-Light.ttf") format("truetype");
+  font-weight: $font-weight-light100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: $primary-font-fontface;
+  src: url("../../assets/fonts/ubuntu/Ubuntu-LightItalic.ttf")
+    format("truetype");
+  font-weight: $font-weight-light100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: $primary-font-fontface;
+  src: url("../../assets/fonts/ubuntu/Ubuntu-Medium.ttf") format("truetype");
+  font-weight: $font-weight-semi-bold400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: $primary-font-fontface;
+  src: url("../../assets/fonts/ubuntu/Ubuntu-MediumItalic.ttf")
+    format("truetype");
+  font-weight: $font-weight-semi-bold400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: $primary-font-fontface;
+  src: url("../../assets/fonts/ubuntu/Ubuntu-Bold.ttf") format("truetype");
+  font-weight: $font-weight-bold700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: $primary-font-fontface;
+  src: url("../../assets/fonts/ubuntu/Ubuntu-BoldItalic.ttf") format("truetype");
+  font-weight: $font-weight-bold700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: $secondary-font-fontface;
+  src: url("../../assets/fonts/kitty-paw-font/KittyPawDemoRegular.ttf")
     format("truetype");
   font-weight: $font-weight-regular400; // Regular weight
   font-style: normal;

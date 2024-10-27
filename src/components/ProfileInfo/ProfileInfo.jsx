@@ -1,11 +1,18 @@
 import dog from "../../assets/dog_2.jpeg";
+import { AiTwotonePlusCircle } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import "./ProfileInfo.scss";
 
 function ProfileInfo(props) {
   const user = props.info;
-  if (props) {
-    console.log("props are ", props);
-  }
+  const id = localStorage.getItem("SavedId");
+
+  const navigate = useNavigate();
+
+  const addProfile = () => {
+    navigate("/post/add");
+  };
+
   return (
     <div className="profile-info">
       <div className="profile-info__top-line">
@@ -20,10 +27,19 @@ function ProfileInfo(props) {
             <p className="profile-info__stat--description">Friends</p>
           </div>
         </div>
+        {user.id == id && (
+          <AiTwotonePlusCircle
+            className="profile-info__add-post"
+            onClick={() => addProfile()}
+          />
+        )}
       </div>
       <div className="profile-info__details">
         <h2 className="profile-info__pet-name">{user.pet_name}</h2>
-        <h3 className="profile-info__pet-bio">{user.bio}</h3>
+        {user.temperament != 0 && (
+          <p className="profile-info__pet-temperament">{user.temperament}</p>
+        )}
+        <p className="profile-info__pet-bio">{user.bio}</p>
       </div>
     </div>
   );

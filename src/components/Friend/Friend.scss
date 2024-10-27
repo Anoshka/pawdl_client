@@ -1,14 +1,19 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+
 $primary-color: #f5f5dc;
 $secondary-color: #ff6f61;
 $hover-color: #a8d5ba;
 $text-color: #6f4c3e;
 
 body {
-  font-family: Arial, sans-serif;
+  font-size: 100%;
+  font-family: $primary-font;
   background-color: $primary-color;
 }
 
 .container {
+  font-family: $primary-font;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -17,6 +22,7 @@ body {
 }
 
 .profile-card {
+  font-family: $primary-font;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

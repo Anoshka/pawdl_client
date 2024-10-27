@@ -1,0 +1,9 @@
+@use "./variables" as *;
+
+@font-face {
+  font-family: $primary-font-fontface;
+  src: url("D:/personal/brainstation_program/code/Capstone/assets/fonts/kitty-paw-font/GoodBoy-ZVJrl.ttf")
+    format("truetype");
+  font-weight: $font-weight-regular400; // Regular weight
+  font-style: normal;
+}

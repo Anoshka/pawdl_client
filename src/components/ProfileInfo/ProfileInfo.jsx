@@ -3,7 +3,9 @@ import "./ProfileInfo.scss";
 
 function ProfileInfo(props) {
   const user = props.info;
-
+  if (props) {
+    console.log("props are ", props);
+  }
   return (
     <div className="profile-info">
       <div className="profile-info__top-line">

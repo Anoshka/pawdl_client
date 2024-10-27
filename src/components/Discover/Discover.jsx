@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import dog from "../../assets/dog_1.jpg";
-import "./Friend.scss";
+import "./Discover.scss";
 
-function Friend(props) {
+function Discover(props) {
   const user = props.user;
   return (
     <div className="container">
@@ -16,11 +16,11 @@ function Friend(props) {
           <Link to="/chat">
             <i className="chat-icon">💬</i>
           </Link>
-          <i className="add-icon">✔</i>
+          <i className="add-icon">➕</i>
         </div>
       </div>
     </div>
   );
 }
 
-export default Friend;
+export default Discover;

@@ -1,9 +1,12 @@
+@use "../../styles//partials//mixins" as *;
+@use "../../styles/partials/variables" as *;
+
 .profile-info {
   display: flex;
   flex-direction: column;
   padding: 2rem;
   max-width: 93.75rem;
-  background: white;
+  background: $primary-color;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: 20px auto;

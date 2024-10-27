@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Chat from "./components/Chat/Chat";
+import DiscoverPage from "./pages/DiscoverPage/DiscoverPage";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -36,7 +37,8 @@ const App = () => {
             />
           }
         />
-
+        <Route path="/user/:id" element={<BioPage />} />
+        <Route path="/discover" element={<DiscoverPage />} />
         <Route path="/friends" element={<FriendsPage />} />
         <Route path="/chat" element={<Chat token={token} />} />
         <Route

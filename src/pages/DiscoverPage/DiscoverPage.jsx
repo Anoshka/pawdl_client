@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import { getUsers } from "../../services/users-services";
-import Friend from "../../components/Friend/Friend";
-import "./FriendsPage.scss";
+import Discover from "../../components/Discover/Discover";
+import "./DiscoverPage.scss";
 import { useParams } from "react-router-dom";
 
-function FriendsPage(props) {
-  if (useParams.id) {
-    console.log("id in bio page is ", useParams.id);
-  }
+function DiscoversPage() {
   const [users, setUsers] = useState([]);
   const id = localStorage.getItem("SavedId");
   const [search, setSearch] = useState("");
@@ -29,18 +26,18 @@ function FriendsPage(props) {
   };
 
   return (
-    <div className="friends">
-      <div className="friends__controls">
+    <div className="discover">
+      <div className="discover__controls">
         <input
-          id="friends-search"
-          className="friends__search"
+          id="discover-search"
+          className="discover__search"
           type="text"
           placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <select
-          className="friends__sort"
+          className="discover__sort"
           value={sortOption}
           onChange={handleSortChange}
         >
@@ -53,14 +50,16 @@ function FriendsPage(props) {
       {users.length === 0 && (
         <div className="users-list__not-found">
           <p className="users-list__not-found-description">
-            You have no friends yet, find friends now!
+            You're the first to register
           </p>
         </div>
       )}
       <div className="users__list">
         {users.map((user) => {
           if (user.id != id) {
-            return <Friend key={user.id} user={user} className="users__user" />;
+            return (
+              <Discover key={user.id} user={user} className="users__user" />
+            );
           }
         })}
       </div>
@@ -68,4 +67,4 @@ function FriendsPage(props) {
   );
 }
 
-export default FriendsPage;
+export default DiscoversPage;

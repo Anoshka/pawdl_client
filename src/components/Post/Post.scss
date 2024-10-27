@@ -1,3 +1,7 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
 $post-card-size: 500px;
 $gap: 15px;
 
@@ -8,18 +12,7 @@ $gap: 15px;
   align-items: center;
 
   &__card {
-    width: $post-card-size;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: relative;
-    background: white;
-
-    &:hover {
-      transform: scale(1.05);
-      background-color: #a8d5ba;
-    }
+    @include card;
   }
 
   &__photo {

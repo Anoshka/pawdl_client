@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
-
+import "./Chat.scss";
+import { getCurrentUser } from "../../services/users-services";
+import { AiOutlineSend } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import arrow from "../../assets/arrow_back-mint-green-24px-svg.svg";
 const BASE_URL = "http://localhost:5050";
 
 function Chat({ token }) {
@@ -8,14 +12,20 @@ function Chat({ token }) {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
   const [socket, setSocket] = useState(null);
-  const testobj = {
-    FromUserId: 1,
-    ToUserId: 2,
-    Message: "hi there",
+  const textareaRef = useRef(null);
+
+  const fetchUser = async () => {
+    const response = await getCurrentUser(id);
+    setUser(response.data);
+    console.log("response is ", response.data);
+    return response.data;
   };
+
   useEffect(() => {
     if (token) {
+      fetchUser();
       const socketConnect = io(BASE_URL, {
         auth: { token: token },
       });
@@ -47,30 +57,59 @@ function Chat({ token }) {
   const sendMessage = () => {
     if (message && isLoggedIn) {
       socket.emit("sendMessage", message);
+      console.log("message is ", message);
       setMessage("");
-      //api call
+      textareaRef.current.style.height = "auto"; // Reset height
     } else if (!isLoggedIn) {
       alert("You must be logged in to send messages.");
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      if (e.shiftKey) {
+        return; // Allow new line
+      } else {
+        e.preventDefault();
+        sendMessage();
+      }
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setMessage(e.target.value);
+    textareaRef.current.style.height = "auto"; // Reset height to auto to shrink if needed
+    textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set height to scrollHeight
+  };
+
   return (
-    <div>
-      <h1>Chat</h1>
-      <div>
+    <div className="chat">
+      <div className="chat__header">
+        <Link className="chat__back" to={"/friends"}>
+          <img src={arrow} className="chat__arrow" alt="go back" />
+        </Link>
+      </div>
+      <div className="chat__messages">
         {messages.map((msg, index) => (
-          <div key={index}>
-            {msg.user}: {msg.message}
+          <div key={index} className="chat__text">
+            <p className="chat__name">{user.user_name}:</p>
+            <p className="chat__message" style={{ whiteSpace: "pre-wrap" }}>
+              {msg.message}
+            </p>
           </div>
         ))}
       </div>
-      <input
-        type="text"
+      <textarea
+        ref={textareaRef}
+        className="chat__input"
         value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyPress={(e) => (e.key === "Enter" ? sendMessage() : null)}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
+        rows={1} // Start with a single row
+        placeholder="Type your message here..."
+        style={{ overflow: "hidden" }} // Prevent scrollbars
       />
-      <button onClick={sendMessage}>Send</button>
+      <AiOutlineSend className="chat__send" onClick={() => sendMessage()} />
       {!isLoggedIn && <p>Please log in to send messages.</p>}
     </div>
   );

@@ -47,6 +47,9 @@ const Home = (props) => {
   return (
     <header className="header">
       <nav className="nav">
+        <Link to="/discover" className="nav-link">
+          Discover
+        </Link>
         <Link to="/friends" className="nav-link">
           Friends
         </Link>

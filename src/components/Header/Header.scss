@@ -1,5 +1,8 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
 .header {
-  background-color: #eb7355; // Main header color
+  background-color: $secondary-color; // Main header color
   //padding: 20px 20px;
   display: flex;
   justify-content: flex-end;
@@ -7,6 +10,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  padding: 2rem;
   width: 100%;
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -18,11 +22,11 @@
     gap: 30px;
 
     .nav-link {
-      color: white;
+      color: $primary-color;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s;
-      padding: 20px 20px;
+      padding: 20px 0;
 
       &:hover {
         color: #ffeb3b;
@@ -33,16 +37,16 @@
 
   .hamburger {
     font-size: 24px;
-    color: white;
+    color: $primary-color;
     cursor: pointer;
     position: relative;
   }
 
   .dropdown-content {
     position: absolute;
-    right: 0;
-    top: 40px;
-    background-color: white;
+    right: 2rem;
+    top: 90px;
+    background-color: $primary-color;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     min-width: 160px;

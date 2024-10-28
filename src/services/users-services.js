@@ -19,7 +19,6 @@ export async function getUsers() {
 export async function getCurrentUser(id) {
   try {
     if (id) {
-      console.log(id);
       const url = `${BASE_URL}/users/${id}`;
       const response = axios.get(url);
       return response;
@@ -32,7 +31,6 @@ export async function getCurrentUser(id) {
 export async function getUserPosts(id) {
   try {
     const url = `${BASE_URL}/users/${id}/posts`;
-    //const response = await axios.get(url);
     const response = axios.get(url);
     return response;
   } catch (err) {

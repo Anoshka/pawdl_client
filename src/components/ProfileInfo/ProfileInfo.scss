@@ -1,4 +1,4 @@
-@use "../../styles//partials//mixins" as *;
+@use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
 
 .profile-info {
@@ -19,7 +19,7 @@
 
   &__pet-bio {
     font-size: 1.5rem;
-    color: #444;
+    color: $text-color;
     line-height: 1.4;
   }
 
@@ -89,7 +89,7 @@
 
     &--description {
       font-size: 0.9rem;
-      color: #666;
+      color: $text-color;
       display: none;
       @include tablet {
         display: flex;

@@ -26,13 +26,14 @@ const Home = (props) => {
   };
 
   const onLogoutClick = () => {
-    props.setLoggedIn(false);
+    if (props.setLoggedIn) {
+      props.setLoggedIn(false);
+    }
     localStorage.removeItem("SavedToken");
     localStorage.removeItem("SavedId");
     navigate("/");
   };
 
-  // Handle clicks outside the dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (

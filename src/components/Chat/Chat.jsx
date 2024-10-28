@@ -36,7 +36,6 @@ function Chat({ token }) {
 
   const fetchChat = async () => {
     const response = await getChat(id, friendId);
-    console.log("response on fethc", response.data);
 
     setMessages(response.data);
     return response.data;
@@ -92,7 +91,6 @@ function Chat({ token }) {
       message: message,
     };
     if (message && isLoggedIn) {
-      console.log("emit message is ", message);
       socket.emit(
         "sendMessage",
         "",
@@ -100,12 +98,7 @@ function Chat({ token }) {
         msg_data.sender_name,
         msg_data.receiver_id,
         msg_data.receiver_name,
-        msg_data.message,
-
-        (response) => {
-          console.log("emit response", response);
-          console.log("emit message", message);
-        }
+        msg_data.message
       );
       setMessage("");
       postChat(msg_data);
@@ -134,7 +127,6 @@ function Chat({ token }) {
 
   useEffect(() => {
     chatRef.current?.lastElementChild?.scrollIntoView();
-    console.log("messages ", messages);
   }, [messages]);
 
   return (

@@ -22,7 +22,7 @@ function DiscoversPage() {
 
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
-    // Implement sorting logic based on selected option
+    // To do - implement sort
   };
 
   return (

@@ -13,11 +13,9 @@ const Login = (props) => {
   const navigate = useNavigate();
 
   const onButtonClick = async () => {
-    // Set initial error values to empty
     setEmailError("");
     setPasswordError("");
 
-    // Check if the user has entered both fields correctly
     if ("" === email) {
       setEmailError("Please enter your email");
       return;
@@ -47,9 +45,7 @@ const Login = (props) => {
       const body = JSON.stringify({ email, password });
       const res = await login(body, config);
       const id = res.data._id;
-      //const res = await axios.post(`${}/users/login`, body, config);
       if (res.data.token) {
-        console.log("res data front end ", res.data);
         localStorage.setItem("SavedToken", "Bearer " + res.data.token);
         localStorage.setItem("SavedId", res.data._id);
         props.setLoggedIn(true);

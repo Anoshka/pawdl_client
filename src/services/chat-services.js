@@ -22,7 +22,6 @@ export async function getChat(id, friendId) {
       console.log(id);
       const url = `${BASE_URL}/chat/${id}/${friendId}`;
       const response = axios.get(url);
-      //console.log("my response is ", response);
       return response;
     } else {
       console.log("no ids found");

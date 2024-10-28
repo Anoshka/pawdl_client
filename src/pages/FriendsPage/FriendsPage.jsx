@@ -22,7 +22,7 @@ function FriendsPage(props) {
 
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
-    // Implement sorting logic based on selected option
+    // to do - implement sort
   };
 
   return (

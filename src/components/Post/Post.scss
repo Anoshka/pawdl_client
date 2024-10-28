@@ -41,7 +41,7 @@ $gap: 15px;
   }
 
   &__icon {
-    color: #ff6f61;
+    color: $secondary-color;
     font-size: 24px;
     cursor: pointer;
     transition: color 0.3s;
@@ -60,7 +60,7 @@ $gap: 15px;
 
   &__time {
     font-size: 12px;
-    color: #999;
+    color: $text-color;
     margin: 0 10px 10px;
   }
 }

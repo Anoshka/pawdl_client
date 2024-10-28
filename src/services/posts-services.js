@@ -6,6 +6,18 @@ const authToken = {
     "x-auth-token": localStorage.getItem("SavedToken"),
   },
 };
+
+const randomDogUrl = "https://dog.ceo/api/breeds/image/random";
+
+export async function getDog() {
+  try {
+    const response = await axios.get(randomDogUrl);
+    return response.data.message;
+  } catch (err) {
+    return err.response;
+  }
+}
+
 export async function getPosts() {
   try {
     const url = `${BASE_URL}/posts`;
@@ -19,7 +31,6 @@ export async function getPosts() {
 export async function getPost(id) {
   try {
     const url = `${BASE_URL}/posts/${id}`;
-    //const response = await axios.get(url);
     const response = axios.get(url);
     return response;
   } catch (err) {

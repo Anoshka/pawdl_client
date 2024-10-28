@@ -44,7 +44,7 @@ a {
 }
 
 .App-link {
-  color: #61dafb;
+  color: $secondary-color;
 }
 
 .mainContainer {
@@ -67,7 +67,6 @@ a {
 .titleContainer .title2 {
   font-size: 32px;
   font-weight: bolder;
-  //padding: 5rem 5rem 3.5rem 0.2rem;
 }
 
 .resultContainer,
@@ -128,8 +127,7 @@ a {
   width: 400px;
   font-size: large;
   border-radius: 8px;
-  border: 1px solid grey;
-  //padding-left: 8px;
+  border: 1px solid $text-color;
 }
 
 .eye-icon {
@@ -144,15 +142,15 @@ a {
   display: block;
   width: 300px;
   height: 100%;
-  background: #eee;
+  background: $primary-color;
   list-style-type: none;
 }
 
 .friend {
   width: 400px;
   height: 60px;
-  background: #eee;
-  border-bottom: 1px solid #ddd;
+  background: $primary-color;
+  border-bottom: 1px solid $primary-color;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -162,10 +160,8 @@ a {
   width: 45px;
   height: 45px;
   border-radius: 30px;
-  border: 2px solid #aaa;
+  border: 2px solid $primary-color;
   object-fit: cover;
-  //margin-left: 5px;
-  //margin-right: 10px;
 }
 
 .friend .name {
@@ -176,17 +172,12 @@ a {
   overflow: auto;
 }
 
-/* .friend .selected {
-  background: #dac586;
-  color: $primary-color;
-} */
-
 .friend .selected img {
   border-color: $primary-color;
 }
 
 .friend:not(.selected):hover {
-  background: #8eabe1;
+  background: $hover-color;
   color: $primary-color;
 }
 
@@ -194,7 +185,6 @@ a {
 html,
 body {
   font-family: $primary-font;
-  //padding: 2rem;
   height: 100%;
   width: 100%;
 }
@@ -204,7 +194,6 @@ body {
 }
 
 main {
-  //padding: 5rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;

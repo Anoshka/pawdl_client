@@ -7,10 +7,8 @@ import Post from "../../components/Post/Post";
 
 const Home = (props) => {
   let id = localStorage.getItem("SavedId");
-  console.log("saved id is ", id);
 
   if (useParams()["id"] !== undefined) {
-    console.log("id in bio page is ", useParams()["id"]);
     id = useParams()["id"];
   }
   const { loggedIn, email } = props;
@@ -20,7 +18,6 @@ const Home = (props) => {
   const [posts, setPosts] = useState([]);
 
   const fetchUser = async () => {
-    console.log("user get id is ", id);
     const response = await getCurrentUser(id);
     setUser(response.data);
     return response.data;

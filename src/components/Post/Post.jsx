@@ -4,10 +4,17 @@ import "./Post.scss";
 import editIcon from "../../assets/edit-coral-24px-svg.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { getDog } from "../../services/posts-services";
 
 function Post(props) {
   const { user, userId } = props;
+  const [curDog, setCurDog] = useState("");
   const id = localStorage.getItem("SavedId");
+
+  useState(async () => {
+    const dogLink = await getDog();
+    setCurDog(dogLink);
+  }, []);
 
   return (
     <div className="post">
@@ -18,7 +25,7 @@ function Post(props) {
           </Link>
         )}
 
-        <img src={dog} alt="Pet Photo" className="post__photo" />
+        <img src={curDog} alt="Pet Photo" className="post__photo" />
         <div className="post__icons">
           <FaHeart className="post__icon" />
           <p className="post__likes">1</p>

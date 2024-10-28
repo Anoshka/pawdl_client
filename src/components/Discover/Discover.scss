@@ -23,8 +23,8 @@ body {
 
 .pet-photo {
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 12rem;
+  height: 12rem;
   object-fit: cover;
 }
 
@@ -34,7 +34,7 @@ body {
 }
 
 .pet-bio {
-  color: #555;
+  color: $text-color;
   font-size: 0.9em;
 }
 

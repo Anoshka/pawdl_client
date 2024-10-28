@@ -7,6 +7,7 @@ import Post from "../../components/Post/Post";
 
 const Home = (props) => {
   let id = localStorage.getItem("SavedId");
+  console.log("saved id is ", id);
 
   if (useParams()["id"] !== undefined) {
     console.log("id in bio page is ", useParams()["id"]);

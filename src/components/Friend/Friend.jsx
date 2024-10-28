@@ -14,7 +14,7 @@ function Friend(props) {
             <p className="pet-bio">{user.bio}</p>
           </div>
           <div className="icons">
-            <Link to="/chat">
+            <Link to={`/chat/${user.id}`}>
               <i className="chat-icon">💬</i>
             </Link>
             <i className="add-icon">✔</i>

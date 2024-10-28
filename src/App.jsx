@@ -43,7 +43,7 @@ const App = () => {
         <Route path="/post/:id" element={<AddEditPage />} />
         <Route path="/discover" element={<DiscoverPage />} />
         <Route path="/friends" element={<FriendsPage />} />
-        <Route path="/chat" element={<Chat token={token} />} />
+        <Route path="/chat/:friendId" element={<Chat token={token} />} />
         <Route path="/logout" element={<LogoutPage />} />
         <Route
           path="/login"

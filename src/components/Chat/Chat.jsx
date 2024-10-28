@@ -2,8 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 import "./Chat.scss";
 import { getCurrentUser } from "../../services/users-services";
+import { getChat, saveChat } from "../../services/chat-services";
 import { AiOutlineSend } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import arrow from "../../assets/arrow_back-mint-green-24px-svg.svg";
 const BASE_URL = "http://localhost:5050";
 
@@ -13,7 +14,9 @@ function Chat({ token }) {
     token = localStorage.getItem("SavedToken");
   }
   const id = localStorage.getItem("SavedId");
+  const friendId = useParams()["friendId"];
   const [message, setMessage] = useState("");
+  console.log("friend id is ", friendId);
   const [messages, setMessages] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
@@ -27,9 +30,25 @@ function Chat({ token }) {
     return response.data;
   };
 
+  const fetchChat = async () => {
+    const response = await getChat(id, friendId);
+    console.log("chat so far is ", response);
+    setMessages(response.data);
+    console.log("response is ", response.data);
+    return response.data;
+  };
+
+  const postChat = async (body) => {
+    const response = await saveChat(body, id, friendId);
+    console.log("messages submitted ", response);
+    return response.data;
+  };
+
   useEffect(() => {
     if (token) {
       fetchUser();
+      fetchChat();
+
       console.log("token ", token);
       setIsLoggedIn(true);
       const socketConnect = io(BASE_URL, {
@@ -47,6 +66,7 @@ function Chat({ token }) {
       });
 
       socketConnect.on("receiveMessage", (data) => {
+        console.log("data messages is ", data);
         setMessages((prevMessages) => [...prevMessages, data]);
       });
 
@@ -64,6 +84,7 @@ function Chat({ token }) {
       socket.emit("sendMessage", message);
       console.log("message is ", message);
       setMessage("");
+      postChat({ sender_id: id, receiver_id: friendId, message: message });
       textareaRef.current.style.height = "auto"; // Reset height
     } else if (!isLoggedIn) {
       alert("You must be logged in to send messages.");

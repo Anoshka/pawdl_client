@@ -49,6 +49,7 @@ const Login = (props) => {
       const id = res.data._id;
       //const res = await axios.post(`${}/users/login`, body, config);
       if (res.data.token) {
+        console.log("res data front end ", res.data);
         localStorage.setItem("SavedToken", "Bearer " + res.data.token);
         localStorage.setItem("SavedId", res.data._id);
         props.setLoggedIn(true);

@@ -110,14 +110,15 @@ const Signup = (props) => {
       });
       const res = await register(body, config);
       if (res.data.token) {
+        console.log("there's a token");
         setRegisterResponseMessage("Signup successful...Logging In.");
         setRegisterResponseIsError(false);
         setTimeout(function () {
+          console.log("res data front end ", res.data);
           localStorage.setItem("SavedToken", "Bearer " + res.data.token);
           localStorage.setItem("SavedId", res.data._id);
           props.setLoggedIn(true);
           props.setEmail(email);
-          props.setName(body.user_name);
           navigate(`/`);
         }, 2000);
       }

@@ -9,47 +9,50 @@ import arrow from "../../assets/arrow_back-mint-green-24px-svg.svg";
 const BASE_URL = "http://localhost:5050";
 
 function Chat({ token }) {
-  console.log(" out token ", token);
   if (!token) {
     token = localStorage.getItem("SavedToken");
   }
   const id = localStorage.getItem("SavedId");
   const friendId = useParams()["friendId"];
   const [message, setMessage] = useState("");
-  console.log("friend id is ", friendId);
   const [messages, setMessages] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [friend, setFriend] = useState({});
   const [socket, setSocket] = useState(null);
   const textareaRef = useRef(null);
 
   const fetchUser = async () => {
     const response = await getCurrentUser(id);
     setUser(response.data);
-    console.log("response is ", response.data);
+    return response.data;
+  };
+
+  const fetchFriend = async () => {
+    const response = await getCurrentUser(friendId);
+    setFriend(response.data);
     return response.data;
   };
 
   const fetchChat = async () => {
     const response = await getChat(id, friendId);
-    console.log("chat so far is ", response);
+    console.log("response on fethc", response.data);
+
     setMessages(response.data);
-    console.log("response is ", response.data);
     return response.data;
   };
 
   const postChat = async (body) => {
     const response = await saveChat(body, id, friendId);
-    console.log("messages submitted ", response);
     return response.data;
   };
-
+  const chatRef = useRef(null);
   useEffect(() => {
     if (token) {
       fetchUser();
+      fetchFriend();
       fetchChat();
 
-      console.log("token ", token);
       setIsLoggedIn(true);
       const socketConnect = io(BASE_URL, {
         auth: { token: token },
@@ -66,8 +69,9 @@ function Chat({ token }) {
       });
 
       socketConnect.on("receiveMessage", (data) => {
-        console.log("data messages is ", data);
-        setMessages((prevMessages) => [...prevMessages, data]);
+        setMessages((prevMessages) => {
+          return [...prevMessages, data];
+        });
       });
 
       return () => {
@@ -80,12 +84,32 @@ function Chat({ token }) {
   }, [token]);
 
   const sendMessage = () => {
+    const msg_data = {
+      sender_id: id,
+      sender_name: user["user_name"],
+      receiver_id: friendId,
+      receiver_name: friend["user_name"],
+      message: message,
+    };
     if (message && isLoggedIn) {
-      socket.emit("sendMessage", message);
-      console.log("message is ", message);
+      console.log("emit message is ", message);
+      socket.emit(
+        "sendMessage",
+        "",
+        msg_data.sender_id,
+        msg_data.sender_name,
+        msg_data.receiver_id,
+        msg_data.receiver_name,
+        msg_data.message,
+
+        (response) => {
+          console.log("emit response", response);
+          console.log("emit message", message);
+        }
+      );
       setMessage("");
-      postChat({ sender_id: id, receiver_id: friendId, message: message });
-      textareaRef.current.style.height = "auto"; // Reset height
+      postChat(msg_data);
+      textareaRef.current.style.height = "auto";
     } else if (!isLoggedIn) {
       alert("You must be logged in to send messages.");
     }
@@ -94,7 +118,7 @@ function Chat({ token }) {
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       if (e.shiftKey) {
-        return; // Allow new line
+        return;
       } else {
         e.preventDefault();
         sendMessage();
@@ -104,9 +128,14 @@ function Chat({ token }) {
 
   const handleInputChange = (e) => {
     setMessage(e.target.value);
-    textareaRef.current.style.height = "auto"; // Reset height to auto to shrink if needed
-    textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set height to scrollHeight
+    textareaRef.current.style.height = "auto";
+    textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
   };
+
+  useEffect(() => {
+    chatRef.current?.lastElementChild?.scrollIntoView();
+    console.log("messages ", messages);
+  }, [messages]);
 
   return (
     <div className="chat">
@@ -114,16 +143,19 @@ function Chat({ token }) {
         <Link className="chat__back" to={"/friends"}>
           <img src={arrow} className="chat__arrow" alt="go back" />
         </Link>
+        <h2 className="chat__friend">{friend.user_name}</h2>
       </div>
-      <div className="chat__messages">
-        {messages.map((msg, index) => (
-          <div key={index} className="chat__text">
-            <p className="chat__name">{user.user_name}:</p>
-            <p className="chat__message" style={{ whiteSpace: "pre-wrap" }}>
-              {msg.message}
-            </p>
-          </div>
-        ))}
+      <div className="chat__messages" ref={chatRef}>
+        {messages.map((msg, index) => {
+          return (
+            <div key={index} className="chat__text">
+              <p className="chat__name">{msg.sender_name}:</p>
+              <p className="chat__message" style={{ whiteSpace: "pre-wrap" }}>
+                {msg.message}
+              </p>
+            </div>
+          );
+        })}
       </div>
       <textarea
         ref={textareaRef}
@@ -131,9 +163,9 @@ function Chat({ token }) {
         value={message}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
-        rows={1} // Start with a single row
+        rows={1}
         placeholder="Type your message here..."
-        style={{ overflow: "hidden" }} // Prevent scrollbars
+        style={{ overflow: "hidden" }}
       />
       <AiOutlineSend className="chat__send" onClick={() => sendMessage()} />
       {!isLoggedIn && <p>Please log in to send messages.</p>}

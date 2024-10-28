@@ -16,7 +16,7 @@
     background-image: url("../../assets/images/icons/action/search-24px.svg");
     @include reset-field;
     @include form-field;
-    margin-left: 2rem;
+    margin-left: 4rem;
 
     &:hover {
       cursor: text;

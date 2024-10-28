@@ -27,10 +27,23 @@ export async function getPost(id) {
   }
 }
 
-export async function editPost(id) {
+export async function createPosts(body) {
+  try {
+    const url = `${BASE_URL}/posts/create`;
+    const response = await axios.post(url, body, {
+      headers: {
+        Authorization: `${localStorage.getItem("SavedToken")}`,
+      },
+    });
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+}
+export async function editPost(id, body) {
   try {
     const url = `${BASE_URL}/posts/${id}`;
-    const response = await axios.put(url, {
+    const response = await axios.put(url, body, {
       headers: {
         Authorization: `${localStorage.getItem("SavedToken")}`,
       },

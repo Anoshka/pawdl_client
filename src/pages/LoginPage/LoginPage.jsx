@@ -54,7 +54,7 @@ const Login = (props) => {
         localStorage.setItem("SavedId", res.data._id);
         props.setLoggedIn(true);
         props.setEmail(email);
-        navigate(`/`);
+        navigate(`/bio`);
       } else {
         setLoginErrorVisible(true);
       }

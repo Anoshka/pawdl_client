@@ -1,5 +1,7 @@
 import dog from "../../assets/dog_2.jpeg";
 import { AiTwotonePlusCircle } from "react-icons/ai";
+import { FaPaw } from "react-icons/fa6";
+import { FaDog } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "./ProfileInfo.scss";
 
@@ -19,12 +21,22 @@ function ProfileInfo(props) {
         <img src={dog} alt="Profile" className="profile-info__image" />
         <div className="profile-info__stats">
           <div className="profile-info__stat">
-            <h3 className="profile-info__stat--number">4</h3>
-            <p className="profile-info__stat--description">Posts</p>
+            <div className="profile-info__stat-flex">
+              <FaDog className="profile-info__stat--paw" />
+              <div className="profile-info__stat--info">
+                <h3 className="profile-info__stat--number">4</h3>
+                <p className="profile-info__stat--description">Posts</p>
+              </div>
+            </div>
           </div>
           <div className="profile-info__stat">
-            <h3 className="profile-info__stat--number">20</h3>
-            <p className="profile-info__stat--description">Friends</p>
+            <div className="profile-info__stat-flex">
+              <FaPaw className="profile-info__stat--paw" />
+              <div className="profile-info__stat--info">
+                <h3 className="profile-info__stat--number">20</h3>
+                <p className="profile-info__stat--description">Friends</p>
+              </div>
+            </div>
           </div>
         </div>
         {user.id == id && (
@@ -39,7 +51,7 @@ function ProfileInfo(props) {
         {user.temperament != 0 && (
           <p className="profile-info__pet-temperament">{user.temperament}</p>
         )}
-        <p className="profile-info__pet-bio">{user.bio}</p>
+        {user.bio != 0 && <p className="pet-bio">{user.bio}</p>}
       </div>
     </div>
   );

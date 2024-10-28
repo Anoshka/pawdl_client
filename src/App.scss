@@ -1,5 +1,6 @@
 @use "./styles/partials/typography" as *;
 @use "./styles/partials/variables" as *;
+@use "./styles/partials/mixins" as *;
 
 *,
 *::before,
@@ -195,6 +196,7 @@ body {
   font-family: $primary-font;
   //padding: 2rem;
   height: 100%;
+  width: 100%;
 }
 
 * {
@@ -211,12 +213,5 @@ main {
 }
 
 input[type="button"] {
-  border: none;
-  background: #6495ed;
-  color: $primary-color;
-  padding: 12px 24px;
-  margin: 8px;
-  font-size: 24px;
-  border-radius: 8px;
-  cursor: pointer;
+  @include button;
 }

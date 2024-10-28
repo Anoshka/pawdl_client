@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import dog from "../../assets/dog_1.jpg";
+import dog from "../../assets/dog_2.jpeg";
+import { AiTwotoneMessage } from "react-icons/ai";
 import "./Friend.scss";
 
 function Friend(props) {
@@ -11,13 +12,12 @@ function Friend(props) {
           <div className="profile-card__top">
             <img src={dog} alt="Pet Photo" className="pet-photo" />
             <h2 className="pet-name">{user.pet_name}</h2>
-            <p className="pet-bio">{user.bio}</p>
+            {user.bio != 0 && <p className="pet-bio">{user.bio}</p>}
           </div>
           <div className="icons">
             <Link to={`/chat/${user.id}`}>
-              <i className="chat-icon">💬</i>
+              <AiTwotoneMessage className="chat-icon" />
             </Link>
-            <i className="add-icon">✔</i>
           </div>
         </div>
       </div>

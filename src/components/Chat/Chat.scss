@@ -35,6 +35,9 @@ $text-color: #333;
     border-top-right-radius: 5px;
     display: flex;
   }
+  &__friend {
+    color: $text-color;
+  }
   &__arrow {
     color: pink;
   }
@@ -59,7 +62,7 @@ $text-color: #333;
   }
 
   &__message {
-    width: 100%;
+    width: max-content;
     padding: 1rem;
     background-color: $primary-color;
     border-radius: 1.5rem;

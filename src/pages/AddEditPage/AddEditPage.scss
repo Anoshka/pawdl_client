@@ -1,50 +1,119 @@
-.edit-post {
-  padding: 20px;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/typography" as *;
 
-  h2 {
-    margin-bottom: 20px;
+.form {
+  flex: 1;
+  border-bottom: none;
+  width: 100%;
+  padding: 2rem;
+
+  @include tablet {
+    border-bottom: 2px solid $text-color;
   }
 
-  form {
+  &__input {
+    //padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 1.5rem;
+    width: 100%;
+    color: $secondary-color;
+    :hover {
+    }
+    &::placeholder {
+      color: $secondary-color;
+      opacity: 50%;
+      font-style: italic;
+    }
+    &--description {
+      padding: 1rem 1rem 10rem 1rem;
+      color: $secondary-color;
+      font-size: 1.2rem;
+    }
+    &--check {
+      color: red;
+    }
+  }
+  &__tablet {
     display: flex;
-    flex-direction: column;
-
-    textarea {
-      resize: none;
-      height: 100px;
-      margin-bottom: 20px;
-    }
-
-    .image-upload {
+    justify-content: center;
+    @include tablet {
       display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-      cursor: pointer; // Show pointer on hover
-
-      .add-image-icon {
-        font-size: 2rem; // Adjust the size of the icon
-        color: #ff6f61; // Icon color
-        margin-right: 10px; // Spacing between icon and input
-      }
+      flex-direction: row;
+      justify-content: flex-end;
     }
-
-    .current-image {
-      max-width: 100%; // Ensure the image doesn't overflow
-      margin-bottom: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  &__button--upload {
+    @include button;
+    padding: 1rem 0;
+    @include tablet {
+      display: none;
     }
+  }
+  &__button--right {
+    display: none;
+    @include tablet {
+      display: inline-block;
+      width: 219px;
+      margin-left: 4rem;
+    }
+  }
+  &__cancel {
+    text-decoration: none;
+    color: $hover-color;
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 300;
+    @include tablet {
+      margin-top: 1.5rem;
+    }
+  }
+  &__title {
+    font-weight: 600;
+    color: $secondary-color;
+    margin: 1.5rem 0 0 0;
+  }
+}
 
-    button {
-      background-color: #ff6f61;
-      color: white;
-      padding: 10px;
-      border: none;
-      cursor: pointer;
+.post__upload {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 
-      &:hover {
-        background-color: #ff4081;
-      }
+  @include tablet {
+    width: 100%;
+    border-top: 2px solid $secondary-color;
+    padding: 1em;
+    margin: 0 -1em;
+  }
+
+  &--title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: left;
+    padding: 2rem 0;
+
+    @include tablet {
+      border-bottom: 2px solid $secondary-color;
+    }
+  }
+
+  &--thumbnail {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    padding: 0;
+    margin: 0 0 1px;
+
+    @include tablet {
+      margin-top: 2rem;
+    }
+  }
+
+  &--main {
+    @include tablet {
+      width: 50%;
     }
   }
 }

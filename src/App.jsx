@@ -30,7 +30,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route
-          path="/"
+          path="/bio"
           element={
             <BioPage
               email={email}
@@ -44,7 +44,7 @@ const App = () => {
         <Route path="/discover" element={<DiscoverPage />} />
         <Route path="/friends" element={<FriendsPage />} />
         <Route path="/chat/:friendId" element={<Chat token={token} />} />
-        <Route path="/logout" element={<LogoutPage />} />
+        <Route path="/" element={<LogoutPage />} />
         <Route
           path="/login"
           element={<LoginPage setLoggedIn={setLoggedIn} setEmail={setEmail} />}

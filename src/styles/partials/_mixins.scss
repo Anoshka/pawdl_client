@@ -21,6 +21,7 @@
   padding: 1.25rem;
   text-align: center;
   width: 32rem;
+  min-height: 25rem;
   transition: transform 0.3s;
   display: flex;
   flex-direction: column;
@@ -68,5 +69,24 @@
 
   &::placeholder {
     color: $text-color;
+  }
+}
+
+@mixin button {
+  border: 1px solid $text-color;
+  text-align: center;
+  background: $secondary-color;
+  color: $primary-color;
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  font-size: 24px;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  :hover,
+  :focus {
+    background-color: $hover-color;
+    transform: scale(1.05);
   }
 }

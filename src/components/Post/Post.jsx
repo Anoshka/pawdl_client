@@ -21,12 +21,12 @@ function Post(props) {
         <img src={dog} alt="Pet Photo" className="post__photo" />
         <div className="post__icons">
           <FaHeart className="post__icon" />
-          <p className="post__likes">0</p>
+          <p className="post__likes">1</p>
           <FaComment className="post__icon" />
           <p className="post__comments">0</p>
         </div>
         <p className="post__description">{user.description}</p>
-        <p className="post__time">{user.created_at}</p>
+        <p className="post__time">{user.created_at.split("T")[0]}</p>
       </div>
     </div>
   );

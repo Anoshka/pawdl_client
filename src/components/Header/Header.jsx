@@ -1,70 +1,72 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../services/users-services";
+import logo from "../../assets/logo.png";
 import "./Header.scss";
-import dog from "../../assets/dog_2.jpeg";
 
 const Home = (props) => {
   const { loggedIn, email } = props;
   const navigate = useNavigate();
   const id = localStorage.getItem("SavedId");
-  const [idLink, setIdLink] = useState("");
   const [user, setUser] = useState({});
-
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const fetchUser = async () => {
+    const response = await getCurrentUser(id);
+    setUser(response.data);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const fetchUser = async () => {
-    const response = await getCurrentUser(id);
-    setUser(response.data);
-    return response.data;
-  };
-
-  useEffect(() => {
-    const data = fetchUser();
-  }, []);
-
-  const onLoginClick = () => {
-    if (loggedIn) {
-      localStorage.removeItem("SavedToken");
-      localStorage.removeItem("SavedId");
-      props.setLoggedIn(false);
-    } else {
-      navigate("/login");
-    }
-  };
-
   const onLogoutClick = () => {
-    if (loggedIn) {
-      props.setLoggedIn(false);
-    }
+    props.setLoggedIn(false);
     localStorage.removeItem("SavedToken");
     localStorage.removeItem("SavedId");
-
-    navigate("/logout");
+    navigate("/");
   };
 
-  const onSignupClick = () => {
-    navigate("/register");
-  };
+  // Handle clicks outside the dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownOpen]);
 
   return (
     <header className="header">
-      <nav className="nav">
-        <Link to="/discover" className="nav-link">
-          Discover
+      <div className="header__logo-section">
+        <Link to="/bio">
+          <img src={logo} alt="logo" className="header__logo" />
         </Link>
+      </div>
+      <nav className="nav">
         <Link to="/friends" className="nav-link">
           Friends
         </Link>
-        <Link to="/" className="nav-link">
+        <Link to="/bio" className="nav-link">
           Bio
         </Link>
 
-        <div className="dropdown">
+        <div className="dropdown" ref={dropdownRef}>
           <div className="hamburger" onClick={toggleDropdown}>
             &#9776;
           </div>

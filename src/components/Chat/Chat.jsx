@@ -38,6 +38,7 @@ function Chat({ token }) {
     const response = await getChat(id, friendId);
 
     setMessages(response.data);
+    console.log("chat data is ", response.data);
     return response.data;
   };
 
@@ -80,7 +81,7 @@ function Chat({ token }) {
     } else {
       console.log("No token found, user is not logged in.");
     }
-  }, [token]);
+  }, [token, messages]);
 
   const sendMessage = () => {
     const msg_data = {
@@ -127,7 +128,7 @@ function Chat({ token }) {
 
   useEffect(() => {
     chatRef.current?.lastElementChild?.scrollIntoView();
-  }, [messages]);
+  }, []);
 
   return (
     <div className="chat">
@@ -135,16 +136,25 @@ function Chat({ token }) {
         <Link className="chat__back" to={"/friends"}>
           <img src={arrow} className="chat__arrow" alt="go back" />
         </Link>
-        <h2 className="chat__friend">{friend.user_name}</h2>
+        <h2 className="chat__friend">
+          {friend.pet_name}, {friend.user_name}
+        </h2>
       </div>
       <div className="chat__messages" ref={chatRef}>
         {messages.map((msg, index) => {
+          let date = new Date(msg.created_at);
+
+          let formattedDate = date.toLocaleString();
+          console.log("new date is ", msg.created_at, date, formattedDate);
           return (
             <div key={index} className="chat__text">
               <p className="chat__name">{msg.sender_name}:</p>
               <p className="chat__message" style={{ whiteSpace: "pre-wrap" }}>
                 {msg.message}
               </p>
+              <span className="chat__time" style={{ whiteSpace: "pre-wrap" }}>
+                {formattedDate}
+              </span>
             </div>
           );
         })}

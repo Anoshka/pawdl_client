@@ -6,9 +6,9 @@ const authToken = {
     "x-auth-token": localStorage.getItem("SavedToken"),
   },
 };
-export async function getUsers() {
+export async function getUsers(query) {
   try {
-    const url = `${BASE_URL}/users`;
+    const url = `${BASE_URL}/users${query ? "?" + query : ""}`;
     const response = await axios.get(url);
     return response;
   } catch (err) {

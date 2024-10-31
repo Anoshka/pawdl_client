@@ -11,20 +11,25 @@
   }
 }
 .friends {
-  margin-top: 6rem;
+  margin-top: 10rem;
   &__search {
     background-image: url("../../assets/images/icons/action/search-24px.svg");
     @include reset-field;
     @include form-field;
-    margin-left: 4rem;
+
+    margin-left: 6rem;
+
+    @include tablet {
+      margin-left: 4rem;
+    }
 
     &:hover {
       cursor: text;
     }
   }
   &__sort {
-    margin-left: 1rem;
-    padding: 0.55rem 1rem;
+    margin: 1rem 0 0 6rem;
+    padding: 0.55rem 2rem;
     border: 1px solid $secondary-color;
     border-radius: 1.25rem;
     background-color: $primary-color;
@@ -32,6 +37,10 @@
     cursor: pointer;
     font-family: $primary-font;
 
+    @include tablet {
+      margin: 1rem 0 0 4rem;
+      padding: 0.55rem 1rem;
+    }
     &:hover {
       border-color: $primary-color;
     }

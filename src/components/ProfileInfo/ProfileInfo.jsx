@@ -4,16 +4,29 @@ import { FaPaw } from "react-icons/fa6";
 import { FaDog } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "./ProfileInfo.scss";
+import { getUserPosts } from "../../services/users-services";
+import { useEffect, useState } from "react";
 
 function ProfileInfo(props) {
   const user = props.info;
   const id = localStorage.getItem("SavedId");
+  const [posts, setPosts] = useState([]);
 
   const navigate = useNavigate();
 
   const addProfile = () => {
     navigate("/post/add");
   };
+
+  const userPosts = async () => {
+    const response = await getUserPosts(id);
+    setPosts(response.data);
+    return response.data;
+  };
+
+  useEffect(() => {
+    userPosts();
+  }, []);
 
   return (
     <div className="profile-info">
@@ -24,7 +37,7 @@ function ProfileInfo(props) {
             <div className="profile-info__stat-flex">
               <FaDog className="profile-info__stat--paw" />
               <div className="profile-info__stat--info">
-                <h3 className="profile-info__stat--number">4</h3>
+                <h3 className="profile-info__stat--number">{posts.length}</h3>
                 <p className="profile-info__stat--description">Posts</p>
               </div>
             </div>
@@ -33,7 +46,12 @@ function ProfileInfo(props) {
             <div className="profile-info__stat-flex">
               <FaPaw className="profile-info__stat--paw" />
               <div className="profile-info__stat--info">
-                <h3 className="profile-info__stat--number">20</h3>
+                {user.pet_name == "Zeca" && (
+                  <h3 className="profile-info__stat--number">0</h3>
+                )}
+                {user.pet_name != "Zeca" && (
+                  <h3 className="profile-info__stat--number">10</h3>
+                )}
                 <p className="profile-info__stat--description">Friends</p>
               </div>
             </div>

@@ -46,7 +46,8 @@
     @include button;
     padding: 1rem 0;
     @include tablet {
-      display: none;
+      padding: 1rem 3rem;
+      margin-left: 3rem;
     }
   }
   &__button--right {
@@ -80,6 +81,9 @@
   flex-direction: column;
   width: 100%;
 
+  &--image {
+  }
+
   @include tablet {
     width: 100%;
     border-top: 2px solid $secondary-color;
@@ -91,7 +95,8 @@
     font-size: 2rem;
     font-weight: 700;
     text-align: left;
-    padding: 2rem 0;
+    padding: 5rem 0 2rem;
+    margin-bottom: 2rem;
 
     @include tablet {
       border-bottom: 2px solid $secondary-color;

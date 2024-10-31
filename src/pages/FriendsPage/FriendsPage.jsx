@@ -11,14 +11,15 @@ function FriendsPage(props) {
   const [sortOption, setSortOption] = useState("name"); // Default sort option
 
   const fetchUser = async () => {
-    const response = await getUsers();
+    const response =
+      search.length > 0 ? await getUsers(`s=${search}`) : await getUsers();
     setUsers(response.data);
     return response.data;
   };
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [search]);
 
   const handleSortChange = (e) => {
     setSortOption(e.target.value);

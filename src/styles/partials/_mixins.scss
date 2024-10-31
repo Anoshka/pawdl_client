@@ -19,13 +19,19 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin: 15px;
   padding: 1.25rem;
+  margin-left: 3rem;
   text-align: center;
-  width: 32rem;
-  min-height: 25rem;
+  width: 21rem;
+  min-height: 33rem;
   transition: transform 0.3s;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @include tablet {
+    width: 32rem;
+    margin-left: 0;
+  }
 
   &:hover {
     transform: scale(1.05);

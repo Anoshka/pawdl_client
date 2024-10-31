@@ -7,7 +7,7 @@
   flex-direction: column;
   height: 85vh;
   max-width: 100%;
-  margin: 5rem 2rem;
+  margin: 9rem 2rem;
   background-image: url("../../assets/bg-bronze-beige.png");
   box-shadow: 4rem 4rem 4rem 4rem $primary-color inset;
   background-size: 40%;
@@ -15,6 +15,18 @@
   border: 1px solid $hover-color;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  @include tablet {
+    margin: 5rem 2rem;
+  }
+
+  &__text {
+    display: flex;
+    padding: 10px 0;
+    width: 100%;
+    align-items: center;
+    //border-bottom: 1px solid $hover-color;
+  }
 
   &__header {
     background-color: $primary-color;
@@ -40,13 +52,6 @@
     padding: 1rem;
     overflow-y: auto;
     border-bottom: 1px solid $hover-color;
-  }
-
-  &__text {
-    display: flex;
-    margin-bottom: 10px;
-    width: 100%;
-    align-items: flex-end;
   }
 
   &__name {
@@ -109,5 +114,11 @@
     cursor: pointer;
     bottom: 1.2rem;
     right: 1rem;
+  }
+  &__time {
+    font-size: 0.7rem;
+    color: $hover-color;
+    width: 20%;
+    justify-self: flex-end;
   }
 }

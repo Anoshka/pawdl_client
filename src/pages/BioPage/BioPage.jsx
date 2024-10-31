@@ -31,7 +31,7 @@ const Home = (props) => {
   useEffect(() => {
     fetchUser();
     fetchPosts();
-  }, []);
+  }, [posts]);
 
   const onLoginClick = () => {
     if (loggedIn) {

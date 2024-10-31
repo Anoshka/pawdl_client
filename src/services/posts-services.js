@@ -18,7 +18,7 @@ export async function getDog() {
   }
 }
 
-export async function getPosts() {
+export async function getPosts(query) {
   try {
     const url = `${BASE_URL}/posts`;
     const response = await axios.get(url);

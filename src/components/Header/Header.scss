@@ -4,6 +4,8 @@
 .header {
   background-color: $secondary-color;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   position: fixed;
@@ -14,30 +16,77 @@
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 
+  @include tablet {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
   &__logo-section {
     width: 100%;
-    margin-left: 4rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin-top: 1rem;
+
+    @include tablet {
+      margin: 0 0 0 2rem;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+
+  &__pet-name {
+    padding-left: 2rem;
+    font-family: $primary-font;
+    color: $primary-color;
+    font-size: 1.5rem;
+    font-weight: 300;
+
+    @include tablet {
+      font-size: 3rem;
+    }
   }
 
   &__logo {
-    width: 4rem;
+    width: 3rem;
     justify-self: flex-start;
+
+    @include tablet {
+      width: 4rem;
+    }
   }
 
   .nav {
     display: flex;
+    width: 100%;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-evenly;
     gap: 30px;
-    padding-right: 1.5rem;
+    padding-right: 1rem;
+    padding-left: 3rem;
+
+    @include tablet {
+      padding-right: 1.5rem;
+      padding-left: 0;
+      justify-content: flex-end;
+    }
 
     .nav-link {
       color: $primary-color;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s;
-      padding: 3.25rem 2rem 3rem;
-      font-size: 1.5rem;
+      padding: 3.25rem 0.5rem 3rem;
+      font-size: 1rem;
+      width: 100%;
+      text-align: center;
+
+      @include tablet {
+        font-size: 1.5rem;
+        padding: 3.25rem 2rem 3rem;
+        width: 20%;
+        text-align: left;
+      }
 
       &:hover {
         color: $hover-color;

@@ -1,46 +1,34 @@
-import img from "../../assets/dog_1.jpg";
 import "./AddEditPage.scss";
+import img from "../../assets/zeca.jpeg";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createPosts } from "../../services/posts-services";
-import axios from "axios";
-
-const baseUrl = "http://localhost:6060/posts/create";
 
 function AddEditPage() {
   const navigate = useNavigate();
   const id = localStorage.getItem("SavedId");
 
-  async function postData(data) {
-    try {
-      const response = await axios.createPosts(data);
-      return response.data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  const [image, setImage] = useState(null);
+  const [description, setDescription] = useState("");
 
-  const [image, setImage] = useState(img);
-  const [description, setDescription] = useState([]);
+  const isDescriptionValid = () => description.length > 0;
 
-  const isDescriptionValid = () => {
-    if (description.length == 0) {
-      return false;
-    }
-    return true;
-  };
+  const isFormValid = () => isDescriptionValid() && image !== null;
 
-  const isFormValid = () => {
-    if (!isDescriptionValid()) {
-      return false;
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
-    return true;
   };
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
     if (isFormValid()) {
-      event.preventDefault();
-      // eslint-disable-next-line react/prop-types
       const data = {
         user_id: id,
         image: img,
@@ -48,16 +36,20 @@ function AddEditPage() {
         description: description,
       };
 
-      const postResponse = await createPosts(data);
-
-      if (postResponse) {
-        setDescription("");
+      try {
+        const postResponse = await createPosts(data);
+        if (postResponse) {
+          setDescription("");
+          setImage(null);
+          alert("Post uploaded successfully!");
+          navigate("/bio");
+        }
+      } catch (error) {
+        console.error("Error uploading post:", error);
+        alert("Failed to upload post. Please try again.");
       }
-      alert("Post uploaded successfully!");
-      navigate("/bio");
     } else {
       alert("Failed to upload post, please enter valid form entries!");
-      return;
     }
   };
 
@@ -68,7 +60,39 @@ function AddEditPage() {
   return (
     <div className="post__upload">
       <h1 className="post__upload--title">Upload Post</h1>
-      <img className="post__upload--main" src={img} alt="puppy pic" />
+      <div className="image-container">
+        {image ? (
+          <>
+            <img className="post__upload--main" src={image} alt="Uploaded" />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              style={{ display: "none" }}
+              id="image-upload"
+            />
+            <label
+              htmlFor="image-upload"
+              className="image-upload__label image-upload__label--change"
+            >
+              Change Image
+            </label>
+          </>
+        ) : (
+          <>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              style={{ display: "none" }}
+              id="image-upload"
+            />
+            <label htmlFor="image-upload" className="image-upload__label">
+              Upload Image
+            </label>
+          </>
+        )}
+      </div>
 
       <form className="form" onSubmit={handleSubmit}>
         <h2 className="form__title">SAY SOMETHING</h2>
@@ -80,18 +104,19 @@ function AddEditPage() {
           value={description}
           onChange={(event) => setDescription(event.target.value)}
         />
-        {description.length == 0 && (
+        {description.length === 0 && (
           <p className="form__input--check">Please enter valid description</p>
         )}
-        <button className="form__button form__button--upload">POST</button>
+        <button
+          className="form__button form__button--upload"
+          onClick={handleSubmit}
+        >
+          POST
+        </button>
         <div className="form__tablet">
           <Link className="form__cancel" to={`/bio`}>
             CANCEL
           </Link>
-
-          <button className="form__button form__button--upload form__button--right">
-            POST
-          </button>
         </div>
       </form>
     </div>

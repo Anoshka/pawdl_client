@@ -58,8 +58,10 @@ const Home = (props) => {
   useEffect(() => {
     const isFriendsPage = location.pathname === "/friends";
     const isChatPage = location.pathname.startsWith("/chat/");
+    const isBioPage = location.pathname.startsWith("/bio");
+    const isAddPage = location.pathname === "/post/add";
 
-    setPrintName(isFriendsPage || isChatPage);
+    setPrintName(isFriendsPage || isChatPage || isBioPage || isAddPage);
   }, [location.pathname]); // Add dependency on pathname to rerun when it changes
 
   return (

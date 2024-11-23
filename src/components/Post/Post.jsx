@@ -14,6 +14,7 @@ function Post(props) {
 
   const likesHandler = async () => {
     const postId = props.user.id;
+    console.log("user name is ", props.user);
     const data = {
       id: postId,
       user_id: userId,
@@ -26,6 +27,7 @@ function Post(props) {
 
   useState(async () => {
     const dogLink = await getDog(userId);
+    console.log("post is ", dogLink);
     setPost(dogLink);
   }, []);
 
@@ -47,7 +49,12 @@ function Post(props) {
           </div>
         )}
 
-        <img src={dog} alt="Pet Photo" className="post__photo" />
+        {userId == id && (
+          <img src={dog} alt="Pet Photo" className="post__photo" />
+        )}
+        {userId != id && (
+          <img src={post} alt="Pet Photo" className="post__photo" />
+        )}
         <div className="post__icons">
           <FaHeart className="post__icon" onClick={likesHandler} />
           <p className="post__likes">{props.user.likes}</p>

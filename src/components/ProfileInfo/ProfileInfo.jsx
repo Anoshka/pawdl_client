@@ -50,7 +50,7 @@ function ProfileInfo(props) {
                   <h3 className="profile-info__stat--number">0</h3>
                 )}
                 {user.pet_name != "Zeca" && (
-                  <h3 className="profile-info__stat--number">10</h3>
+                  <h3 className="profile-info__stat--number">7</h3>
                 )}
                 <p className="profile-info__stat--description">Friends</p>
               </div>

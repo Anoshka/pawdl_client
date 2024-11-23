@@ -47,6 +47,7 @@ function Chat({ token }) {
     return response.data;
   };
   const chatRef = useRef(null);
+
   useEffect(() => {
     if (token) {
       fetchUser();
